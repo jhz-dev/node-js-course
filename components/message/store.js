@@ -1,7 +1,11 @@
-const list = [];
+const connectDB = require('../../lib/db');
+const Model = require('./model');
 
-const addMessage = (message) => {
-    list.push(message);
+const addMessage = (messageParam) => {
+    connectDB().then(() => {
+        const message = new Model(messageParam);
+        message.save();
+    })
 };
 
 const getMessages = () => {
