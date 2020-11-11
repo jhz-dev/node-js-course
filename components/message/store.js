@@ -7,9 +7,15 @@ const addMessage = async (messageParam) => {
     message.save();
 };
 
-const getMessages = async () => {
+const getMessages = async (user) => {
+    let filter = {};
     await connectDB();
-    const messages = await Model.find();
+
+    if (user !== null) {
+        filter = { user };
+    }
+
+    const messages = await Model.find(filter);
     return messages;
 }
 

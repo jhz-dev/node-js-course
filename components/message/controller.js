@@ -19,9 +19,14 @@ const addMessage = (user, message) => {
     });
 }
 
-const getMessages = () => {
-    return new Promise((resolve, reject) => {
-        resolve(store.list());
+const getMessages = (user) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            resolve(await store.list(user));   
+        } catch (error) {
+            reject(error);
+            return false;
+        }
     });
 }
 

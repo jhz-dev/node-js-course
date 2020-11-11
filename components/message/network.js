@@ -5,8 +5,9 @@ const controller = require('./controller');
 const router = express.Router();
 
 router.get('/', async(req, res) => {
+    const user = req.query.user || null;
     try {
-        const messages = await controller.getMessages();
+        const messages = await controller.getMessages(user);
         response.success(req, res, messages);
     } catch (error) {
         response.error(req, res, error, 500);
