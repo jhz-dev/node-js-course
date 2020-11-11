@@ -23,4 +23,14 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.patch('/:id', async (req, res) => {
+    const { body, params } = req;
+    try {
+        const message = await controller.updateMessage(params.id, body.message);
+        response.success(req, res, message, 200);
+    } catch (error) {
+        response.error(req, res, error, 500);
+    }
+});
+
 module.exports = router;
