@@ -34,4 +34,14 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    const { params } = req;
+    try {
+        const message = await controller.deleteMessage(params.id);
+        response.success(req, res, message, 200);
+    } catch (error) {
+        response.error(req, res, error, 500);
+    }
+});
+
 module.exports = router;

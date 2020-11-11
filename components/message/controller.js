@@ -4,7 +4,6 @@ const addMessage = (user, message) => {
     return new Promise((resolve, reject) => {
         if (!user || !message) {
             reject('los atos son incorrectos');
-            return false;
         }
         
         const fullMessage = {
@@ -25,7 +24,6 @@ const getMessages = (user) => {
             resolve(await store.list(user));   
         } catch (error) {
             reject(error);
-            return false;
         }
     });
 }
@@ -34,7 +32,6 @@ const updateMessage = (id, message) => {
     return new Promise(async (resolve, reject) => {
         if (!id && !message) {
             reject('Invalid data');
-            return false;
         }
 
         const result = await store.update(id, message);
@@ -42,4 +39,15 @@ const updateMessage = (id, message) => {
     });
 }
 
-module.exports = { addMessage, getMessages, updateMessage }
+const deleteMessage = (id) => {
+    return new Promise(async (resolve, reject) => {
+        if (!id) {
+            reject('Invalid data');
+        }
+
+        const result = await store.delete(id);
+        resolve(result);
+    });
+}
+
+module.exports = { addMessage, getMessages, updateMessage, deleteMessage }

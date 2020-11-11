@@ -27,8 +27,14 @@ const updateMessage = async (id, message) => {
     return updatedMessage;
 }
 
+const deleteMessage = async (id) => {
+    await connectDB();
+    return await Model.findOneAndDelete({ _id: id });;
+}
+
 module.exports = {
     add: addMessage,
     list: getMessages,
     update: updateMessage,
+    delete: deleteMessage,
 }
