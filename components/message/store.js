@@ -1,16 +1,12 @@
-const connectDB = require('../../lib/db');
 const Model = require('./model');
 
 const addMessage = async (messageParam) => {
-    await connectDB();
     const message = new Model(messageParam);
     message.save();
 };
 
 const getMessages = async (user) => {
     let filter = {};
-    await connectDB();
-
     if (user !== null) {
         filter = { user };
     }
@@ -20,7 +16,6 @@ const getMessages = async (user) => {
 }
 
 const updateMessage = async (id, message) => {
-    await connectDB();
     const foundMessage = await Model.findOne({ _id: id });
     foundMessage.message = message;
     const updatedMessage = await foundMessage.save();
@@ -28,7 +23,6 @@ const updateMessage = async (id, message) => {
 }
 
 const deleteMessage = async (id) => {
-    await connectDB();
     return await Model.findOneAndDelete({ _id: id });;
 }
 

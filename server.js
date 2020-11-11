@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 require('dotenv').config()
 const app = express();
 const router = require('./network/routes');
+const connectDB = require('./db');
+
+connectDB();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

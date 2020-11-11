@@ -8,7 +8,7 @@ const mongoUrl = `mongodb+srv://${DB_USER}:${DB_PASSWD}@${DB_HOST}/${DB_NAME}`
 db.Promise = global.Promise;
 
 async function connectDB () {
-  return db.connect(mongoUrl, {
+  return await db.connect(mongoUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
