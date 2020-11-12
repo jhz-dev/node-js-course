@@ -1,12 +1,13 @@
 const store = require('./store');
 
-const addMessage = (user, message) => {
+const addMessage = (user, message, chat) => {
     return new Promise((resolve, reject) => {
-        if (!user || !message) {
-            reject('los atos son incorrectos');
+        if (!user || !message || !chat) {
+            reject('los datos son incorrectos');
         }
         
         const fullMessage = {
+            chat,
             user,
             message,
             date: new Date()
@@ -18,10 +19,10 @@ const addMessage = (user, message) => {
     });
 }
 
-const getMessages = (user) => {
+const getMessages = (chat) => {
     return new Promise(async (resolve, reject) => {
         try {
-            resolve(await store.list(user));   
+            resolve(await store.list(chat));   
         } catch (error) {
             reject(error);
         }

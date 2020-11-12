@@ -5,9 +5,9 @@ const controller = require('./controller');
 const router = express.Router();
 
 router.get('/', async(req, res) => {
-    const user = req.query.user || null;
+    const chat = req.query.chat || null;
     try {
-        const messages = await controller.getMessages(user);
+        const messages = await controller.getMessages(chat);
         response.success(req, res, messages);
     } catch (error) {
         response.error(req, res, error, 500);
@@ -17,7 +17,7 @@ router.get('/', async(req, res) => {
 router.post('/', async (req, res) => {
     const { body } = req;
     try {
-        const message = await controller.addMessage(body.user, body.message);
+        const message = await controller.addMessage(body.user, body.message, body.chat);
         response.success(req, res, message, 201);
     } catch (error) {
         response.error(req, res, error, 400);

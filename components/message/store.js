@@ -1,3 +1,4 @@
+const { Promise } = require('mongoose');
 const Model = require('./model');
 
 const addMessage = async (messageParam) => {
@@ -5,14 +6,23 @@ const addMessage = async (messageParam) => {
     message.save();
 };
 
-const getMessages = async (user) => {
-    let filter = {};
-    if (user !== null) {
-        filter = { user };
-    }
+const getMessages = (chat) => {
+    return new Promise((resolve, reject) => {
+        let filter = {};
+        if (chat !== null) {
+            filter = { chat };
+        }
+        
+        Model.find(filter)
+        .populate('user')
+        .exec((error, populatedData) => {
+            if (error) {
+                reject(error);
+            }
 
-    const messages = await Model.find(filter);
-    return messages;
+            resolve(populatedData);
+        });
+    });
 }
 
 const updateMessage = async (id, message) => {
