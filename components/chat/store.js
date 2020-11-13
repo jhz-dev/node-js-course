@@ -8,7 +8,7 @@ const addChat = async (chatParam) => {
 const getChats = async (userId) => {
     return new Promise((resolve, reject) => {
         let filter = {};
-        if (userId !== null) {
+        if (userId) {
             filter = { users: userId };
         }
     

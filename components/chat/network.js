@@ -15,6 +15,16 @@ router.post('/', async (req, res) => {
 });
 
 
+router.get('/', async(req, res) => {
+    try {
+        const chats = await controller.listChats();
+        response.success(req, res, chats);
+    } catch (error) {
+        response.error(req, res, error, 500);
+    }
+});
+
+
 router.get('/:userId', async(req, res) => {
     const userId = req.query.userId || null;
     try {
