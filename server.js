@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 require('dotenv').config()
+const config = require('./config');
+
 const app = express();
 const router = require('./network/routes');
 const connectDB = require('./db');
@@ -15,8 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 router(app)
 
-app.use('/app', express.static('public'))
+app.use(`/${config.publicRoute}`, express.static('public'))
 
-app.listen(3000);
+app.listen(config.port);
 
-console.log('escuchando en http://localhost:3000');
+console.log(`escuchando en ${config.host}:${config.port}`);

@@ -1,14 +1,14 @@
 'use strict'
 
 const db = require('mongoose');
-const { DB_USER, DB_PASSWD, DB_HOST, DB_NAME } = process.env
-const mongoUrl = `mongodb+srv://${DB_USER}:${DB_PASSWD}@${DB_HOST}/${DB_NAME}`
+const config = require('./config');
+
 
 // tells mongoose to use the global Promise class, this a godd practice
 db.Promise = global.Promise;
 
 async function connectDB () {
-  return await db.connect(mongoUrl, {
+  return await db.connect(config.dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
